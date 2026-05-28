@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="ClinicCluster Patients — Upload patient CSV data and browse clustered patient records.">
+  <title>Patients | ClinicCluster</title>
+  <link rel="icon" href="../images/favicon.ico">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Press+Start+2P&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/global.css">
+  <link rel="stylesheet" href="../css/patients.css">
+</head>
+<body>
+  <header class="topbar">
+    <nav class="nav">
+      <a class="brand" href="index.html"><img class="brand-logo" src="../images/logo.png" alt="">ClinicCluster</a>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="dashboard.html">Dashboard</a>
+        <a class="active" href="patients.html">Patients</a>
+        <a href="results.html">Results</a>
+      </div>
+    </nav>
+  </header>
+  <main class="page-shell">
+    <section class="page-head">
+      <div>
+        <p class="eyebrow">CSV intake &amp; review</p>
+        <h1>Patient Registry</h1>
+      </div>
+    </section>
+
+    <section class="upload-zone" id="uploadZone">
+      <input id="csvInput" type="file" accept=".csv" hidden>
+      <strong>Drop your patient CSV here or click to browse</strong>
+      <span>Upload any CSV with patient clinical data. BMI, clusters, and risk labels are calculated automatically.</span>
+      <span class="upload-hint">Supports: PatientID, Age, Weight, Height, Blood Pressure, Blood Sugar, Cholesterol, Visits, Medications</span>
+    </section>
+
+    <div id="autoCalcBanner" class="auto-calc-banner hidden">
+      <span class="calc-icon">✅</span>
+      <div class="calc-text">
+        <strong>Data uploaded &amp; auto-calculated successfully!</strong>
+        <span>All features have been processed and patients clustered automatically.</span>
+      </div>
+      <div class="auto-calc-tags">
+        <span class="auto-calc-tag">BMI</span>
+        <span class="auto-calc-tag">Clusters</span>
+        <span class="auto-calc-tag">Risk Labels</span>
+      </div>
+    </div>
+
+    <section class="toolbar">
+      <input id="searchInput" type="search" placeholder="🔍 Search by Patient ID...">
+      <select id="riskFilter">
+        <option value="">All Clusters</option>
+        <option>Low Risk</option>
+        <option>Moderate Risk</option>
+        <option>High Risk</option>
+        <option>Critical Risk</option>
+      </select>
+      <span id="resultCount">Showing 0 patients</span>
+    </section>
+
+    <section class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th data-sort="patient_id">Patient ID</th>
+            <th data-sort="age">Age</th>
+            <th data-sort="bmi">BMI</th>
+            <th data-sort="blood_sugar">Blood Sugar</th>
+            <th data-sort="cholesterol">Cholesterol</th>
+            <th data-sort="bp_systolic">Systolic BP</th>
+            <th data-sort="visits_per_year">Visits/Year</th>
+            <th data-sort="medication_count">Medications</th>
+            <th data-sort="risk_label">Risk Label</th>
+          </tr>
+        </thead>
+        <tbody id="patientRows"></tbody>
+      </table>
+      <div id="emptyState" class="empty-state hidden">No patients found. Upload a CSV or clear the filters.</div>
+    </section>
+    <p class="section-desc">This table displays every patient record with their clinical measurements and assigned risk label. Each column is sortable by clicking the header. Purpose: Provides a comprehensive, sortable view of all patient data after clustering. Meaning: The Risk Label column shows which cluster each patient belongs to — color-coded by severity — allowing staff to identify at-risk patients and cross-reference their individual metrics against cluster averages shown on the Results page.</p>
+    <nav id="pagination" class="pagination" aria-label="Patient pages"></nav>
+  </main>
+  <div id="toast" class="toast hidden"></div>
+  <script src="../js/api.js"></script>
+  <script src="../js/patients.js"></script>
+</body>
+</html>

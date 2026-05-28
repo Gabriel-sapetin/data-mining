@@ -1,0 +1,320 @@
+CLINICCLUSTER TECH STACK AND PURPOSES
+
+Project Name:
+ClinicCluster
+
+Project Type:
+Clinic patient clustering and data mining system
+
+Main Purpose:
+ClinicCluster is used to upload patient CSV records, clean and process the data,
+group similar patients using K-Means clustering, visualize cluster patterns, and
+identify patient risk groups such as Low Risk, Moderate Risk, High Risk, and
+Critical Risk.
+
+
+1. FRONTEND TECHNOLOGIES
+
+HTML
+Purpose:
+HTML is used to build the structure of the web pages. It defines the pages,
+sections, tables, upload forms, navigation links, and content areas of the system.
+
+Used in:
+- Home page
+- Dashboard page
+- Patients page
+- Results page
+
+
+CSS
+Purpose:
+CSS is used to design and style the system. It controls the colors, layout,
+spacing, table design, buttons, navigation bar, upload area, dashboard cards, and
+overall visual appearance.
+
+Used for:
+- Pixel-style interface design
+- Responsive layout
+- Page styling
+- Table styling
+- Upload zone styling
+- Dashboard and results design
+
+
+JavaScript
+Purpose:
+JavaScript is used to make the frontend interactive. It connects the web pages to
+the backend API, handles CSV uploads, fetches patient records, updates dashboard
+statistics, filters/searches patients, and displays charts.
+
+Used for:
+- Uploading CSV files
+- Calling backend API endpoints
+- Displaying patient records
+- Searching and filtering patients
+- Loading statistics
+- Showing charts and visualizations
+- Showing success or error messages
+
+
+2. BACKEND TECHNOLOGIES
+
+Python
+Purpose:
+Python is the main programming language used for the backend. It handles data
+processing, cleaning, clustering, statistics, and API logic.
+
+Why Python is used:
+Python is widely used in data mining and machine learning because it has powerful
+libraries for data analysis and clustering.
+
+
+FastAPI
+Purpose:
+FastAPI is used to create the backend API of the system. It allows the frontend to
+communicate with the backend through routes such as upload, clustering, patients,
+and statistics.
+
+Used for:
+- Creating API endpoints
+- Receiving uploaded CSV files
+- Returning JSON data to the frontend
+- Serving the frontend files
+- Connecting pages to backend processing
+
+
+Uvicorn
+Purpose:
+Uvicorn is the server used to run the FastAPI application. It allows the system to
+run locally in the browser.
+
+Example:
+The backend can run on a local address such as:
+http://127.0.0.1:8001
+
+
+3. DATA PROCESSING AND DATA MINING LIBRARIES
+
+pandas
+Purpose:
+pandas is used to load, clean, organize, and analyze the patient dataset.
+
+Used for:
+- Reading CSV files
+- Removing incomplete records
+- Cleaning patient data
+- Managing rows and columns
+- Calculating and preparing features
+- Grouping data for summaries
+- Creating correlation tables
+
+
+NumPy
+Purpose:
+NumPy is used for numerical operations. It helps process numeric values used in
+machine learning and clustering.
+
+Used for:
+- Handling numeric arrays
+- Supporting mathematical operations
+- Preparing data for clustering
+
+
+scikit-learn
+Purpose:
+scikit-learn is used for machine learning and clustering. In this system, it is
+used to train the K-Means model, calculate the Silhouette Score, normalize or
+process feature data, and perform PCA for cluster visualization.
+
+Used for:
+- K-Means clustering
+- Silhouette Score
+- PCA visualization
+- Machine learning processing
+
+
+K-Means Clustering
+Purpose:
+K-Means is the main clustering algorithm used in the system. It groups patients
+based on similar clinical features.
+
+Used for:
+- Grouping similar patients
+- Assigning cluster labels
+- Finding hidden patient patterns
+- Supporting risk label assignment
+
+
+Silhouette Score
+Purpose:
+The Silhouette Score helps determine the best number of clusters. A higher score
+means the clusters are more separated and meaningful.
+
+Used for:
+- Testing different values of K
+- Choosing the optimal number of clusters
+- Improving clustering quality
+
+
+PCA
+Purpose:
+PCA, or Principal Component Analysis, is used to reduce many features into two
+dimensions so the clusters can be shown in a scatter plot.
+
+Used for:
+- Visualizing clusters
+- Showing patient group separation
+- Plotting centroids
+
+
+4. API AND DATA COMMUNICATION
+
+REST API
+Purpose:
+The system uses API endpoints so the frontend and backend can communicate.
+
+Example endpoints:
+- /api/upload
+- /api/cluster
+- /api/cluster/cached
+- /api/patients
+- /api/stats
+- /api/recommendations
+
+
+JSON
+Purpose:
+JSON is the format used to send data between the backend and frontend.
+
+Used for:
+- Returning upload results
+- Sending patient records
+- Sending chart data
+- Sending cluster summaries
+- Sending statistics
+
+
+CSV
+Purpose:
+CSV is the file format used for patient datasets. The user uploads a CSV file
+containing patient records, and the backend processes it.
+
+Used for:
+- Storing patient records
+- Uploading clinic data
+- Preparing at least 150 rows for the project
+
+
+5. SYSTEM MODULES AND THEIR PURPOSES
+
+main.py
+Purpose:
+This is the main backend application file. It creates the FastAPI app, connects
+the API routes, serves the frontend files, and loads the seed clinic dataset when
+the system starts.
+
+
+upload route
+Purpose:
+This receives the uploaded CSV file, reads it, cleans it, and stores it in the
+system for processing.
+
+
+cluster route
+Purpose:
+This runs the clustering process and returns the clustering results to the
+frontend.
+
+
+patients route
+Purpose:
+This returns patient records to the frontend. It supports viewing, searching,
+filtering, and paginating patient data.
+
+
+stats route
+Purpose:
+This provides summary statistics, dashboard values, and recommendations.
+
+
+data service
+Purpose:
+This handles loading, cleaning, storing, and preparing the dataset.
+
+
+cluster pipeline
+Purpose:
+This controls the full clustering workflow. It gets selected features, normalizes
+the data, finds the best K value, trains K-Means, assigns cluster labels, assigns
+risk labels, and prepares data for graphs.
+
+
+kmeans service
+Purpose:
+This contains the K-Means logic. It finds the best number of clusters, trains the
+model, assigns risk labels, creates PCA points, and prepares cluster bar chart
+data.
+
+
+stats service
+Purpose:
+This creates summaries and statistics for the dashboard and results pages.
+
+
+6. FRONTEND PAGES AND THEIR PURPOSES
+
+Home Page
+Purpose:
+The home page introduces the ClinicCluster system and gives users navigation to
+the main parts of the project.
+
+
+Dashboard Page
+Purpose:
+The dashboard shows important summaries, charts, and overall results from the
+patient dataset.
+
+
+Patients Page
+Purpose:
+The patients page is used to upload CSV files, view patient records, search by
+patient ID, and filter records by risk group.
+
+
+Results Page
+Purpose:
+The results page shows clustering results, visualizations, cluster summaries, and
+interpretations.
+
+
+7. OVERALL SYSTEM PURPOSE
+
+The purpose of the system is to help a clinic analyze patient records through
+data mining. Instead of checking every patient manually, the system uses
+clustering to automatically group patients with similar clinical features.
+
+This helps the clinic:
+- Discover hidden patterns in patient records.
+- Identify groups of patients with similar health conditions.
+- Understand cluster behavior.
+- Recognize high-risk and critical-risk patients.
+- Create better recommendations for patient monitoring.
+- Support decision-making using data.
+
+
+8. SIMPLE DEFENSE EXPLANATION
+
+The system uses HTML, CSS, and JavaScript for the frontend, while Python and
+FastAPI are used for the backend. The frontend allows users to upload CSV files,
+view patient data, search records, and see visualizations. The backend handles
+data cleaning, processing, clustering, and statistics.
+
+pandas is used to manage and clean the dataset. NumPy is used for numerical
+processing. scikit-learn is used for the K-Means clustering algorithm,
+Silhouette Score, and PCA visualization. FastAPI connects the frontend and
+backend using API endpoints, while Uvicorn runs the system locally.
+
+The main purpose of this tech stack is to create a working data mining system
+that can process clinic patient records, group similar patients automatically,
+visualize the clusters, and help interpret patient risk levels.

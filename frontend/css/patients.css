@@ -1,0 +1,269 @@
+/* ================================================================
+   Patients Page
+   ================================================================ */
+
+/* ── Upload Zone ── */
+.upload-zone {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 180px;
+  margin-bottom: var(--s6);
+  padding: var(--s8);
+  border-radius: var(--radius-xl);
+  border: 2px dashed var(--border);
+  background: white;
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.upload-zone:hover,
+.upload-zone.dragging {
+  border-color: var(--primary-light);
+  background: var(--primary-50);
+  transform: scale(1.005);
+}
+
+.upload-zone strong {
+  display: block;
+  color: var(--text);
+  font-weight: 700;
+  font-size: 1rem;
+  margin-bottom: var(--s2);
+}
+
+.upload-zone span {
+  color: var(--text-muted);
+  font-size: 0.88rem;
+  line-height: 1.5;
+  max-width: 500px;
+}
+
+.upload-zone .upload-hint {
+  display: inline-block;
+  margin-top: var(--s3);
+  padding: var(--s1) var(--s3);
+  border-radius: var(--radius-full);
+  background: var(--border-light);
+  color: var(--text-light);
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+/* ── Auto-Calculated Features Banner ── */
+.auto-calc-banner {
+  display: flex;
+  align-items: center;
+  gap: var(--s4);
+  padding: var(--s4) var(--s6);
+  border-radius: var(--radius);
+  background: linear-gradient(135deg, #ecfdf5, #f0f9ff);
+  border: 1px solid #a7f3d0;
+  margin-bottom: var(--s6);
+  animation: fadeIn 0.4s ease;
+}
+
+.auto-calc-banner .calc-icon {
+  font-size: 1.5rem;
+  flex-shrink: 0;
+}
+
+.auto-calc-banner .calc-text strong {
+  display: block;
+  color: #065f46;
+  font-size: 0.85rem;
+  margin-bottom: 2px;
+}
+
+.auto-calc-banner .calc-text span {
+  color: #047857;
+  font-size: 0.8rem;
+}
+
+.auto-calc-tags {
+  display: flex;
+  gap: var(--s2);
+  margin-left: auto;
+  flex-wrap: wrap;
+}
+
+.auto-calc-tag {
+  padding: 3px 10px;
+  border-radius: var(--radius-full);
+  background: white;
+  color: #047857;
+  font-size: 0.72rem;
+  font-weight: 600;
+  border: 1px solid #a7f3d0;
+}
+
+/* ── Toolbar ── */
+.toolbar {
+  display: grid;
+  grid-template-columns: 1fr 200px auto;
+  gap: var(--s3);
+  align-items: center;
+  margin-bottom: var(--s4);
+}
+
+.toolbar input,
+.toolbar select {
+  min-height: 44px;
+  padding: 0 var(--s4);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: white;
+  color: var(--text);
+  font-size: 0.9rem;
+  transition: all 0.2s ease;
+  box-shadow: var(--shadow-xs);
+}
+
+.toolbar input:focus,
+.toolbar select:focus {
+  outline: none;
+  border-color: var(--primary-light);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+}
+
+#resultCount {
+  color: var(--text-muted);
+  font-weight: 600;
+  font-size: 0.85rem;
+}
+
+/* ── Table ── */
+tbody tr:nth-child(even) {
+  background: #fafbfe;
+}
+
+th {
+  cursor: pointer;
+  user-select: none;
+  transition: background 0.15s ease;
+}
+
+th:hover {
+  background: #eef2f7;
+}
+
+/* ── Pagination ── */
+.pagination {
+  display: flex;
+  gap: var(--s2);
+  justify-content: flex-end;
+  margin-top: var(--s4);
+  flex-wrap: wrap;
+}
+
+.pagination button {
+  min-width: 40px;
+  min-height: 40px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text-secondary);
+  background: white;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 0.85rem;
+  transition: all 0.2s ease;
+  box-shadow: var(--shadow-xs);
+}
+
+.pagination button:hover:not(:disabled) {
+  border-color: var(--primary-light);
+  color: var(--primary);
+  background: var(--primary-50);
+}
+
+.pagination button.active {
+  color: white;
+  background: var(--primary);
+  border-color: var(--primary);
+  box-shadow: 0 2px 8px rgba(99, 102, 241, 0.3);
+}
+
+.pagination button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* ── Section Description ── */
+.section-desc {
+  margin: var(--s3) 0 var(--s6);
+  padding: var(--s4) var(--s5);
+  border-left: 3px solid var(--primary);
+  background: rgba(99, 102, 241, 0.06);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  color: var(--text-muted);
+  font-size: 0.82rem;
+  line-height: 1.7;
+  font-weight: 400;
+}
+
+@media (max-width: 760px) {
+  .toolbar { grid-template-columns: 1fr; }
+  .auto-calc-banner { flex-direction: column; text-align: center; }
+  .auto-calc-tags { margin-left: 0; justify-content: center; }
+}
+
+/* Dark pixel theme overrides */
+.upload-zone,
+.auto-calc-banner {
+  border: 3px dashed var(--accent-cyan);
+  color: var(--text-muted);
+  background: rgba(35, 41, 70, 0.88);
+  box-shadow: var(--shadow);
+}
+
+.upload-zone strong,
+.auto-calc-banner strong {
+  color: var(--text);
+}
+
+.upload-zone:hover,
+.upload-zone.dragging {
+  border-color: var(--primary-light);
+  background: rgba(139, 92, 246, 0.16);
+}
+
+.toolbar input,
+.toolbar select {
+  border: 3px solid var(--border);
+  color: var(--text);
+  background: var(--surface-2);
+  box-shadow: 4px 4px 0 rgba(0,0,0,0.3);
+}
+
+.toolbar input::placeholder {
+  color: var(--text-light);
+}
+
+#resultCount {
+  color: var(--accent-cyan);
+  font-weight: 900;
+}
+
+tbody tr:nth-child(even) {
+  background: rgba(255,255,255,0.025);
+}
+
+.pagination button {
+  border: 3px solid var(--primary-light);
+  color: var(--text);
+  background: var(--surface-2);
+  box-shadow: 4px 4px 0 rgba(0,0,0,0.35);
+}
+
+.pagination button:hover:not(:disabled) {
+  color: white;
+  background: var(--primary-50);
+}
+
+.pagination button.active {
+  color: white;
+  background: var(--gradient);
+  border-color: var(--primary-light);
+}

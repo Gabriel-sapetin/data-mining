@@ -1,0 +1,308 @@
+/* ================================================================
+   Results Page
+   ================================================================ */
+
+/* ── Cluster Cards Grid ── */
+.cluster-grid,
+.insight-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--s5);
+  margin-bottom: var(--s8);
+}
+
+.cluster-card,
+.panel,
+.insight-card {
+  border-radius: var(--radius-xl);
+  background: white;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.cluster-card:hover,
+.insight-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+}
+
+.cluster-card {
+  padding: var(--s6);
+  border-left: 5px solid transparent;
+  overflow: hidden;
+  position: relative;
+}
+
+.risk-border-low { border-left-color: var(--success); }
+.risk-border-moderate { border-left-color: var(--warning); }
+.risk-border-high { border-left-color: #f97316; }
+.risk-border-critical { border-left-color: var(--danger); }
+
+.cluster-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s3);
+  margin-bottom: var(--s4);
+}
+
+.cluster-top h2 {
+  font-size: 1.15rem;
+  font-weight: 700;
+}
+
+/* ── Metrics Grid ── */
+.metric-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--s3);
+}
+
+.metric {
+  padding: var(--s3);
+  border-radius: var(--radius);
+  background: var(--bg);
+  border: 1px solid var(--border-light);
+  transition: background 0.2s ease;
+}
+
+.metric:hover {
+  background: var(--primary-50);
+}
+
+.metric span {
+  display: block;
+  color: var(--text-muted);
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--s1);
+}
+
+.metric strong {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--text);
+}
+
+/* ── Panels ── */
+.panel {
+  margin-bottom: var(--s8);
+  padding: var(--s6);
+}
+
+.panel h2 {
+  font-size: 1.3rem;
+  margin-bottom: var(--s4);
+}
+
+/* ── Accordion ── */
+.accordion-item {
+  border-top: 1px solid var(--border);
+}
+
+.accordion-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: var(--s4) 0;
+  border: none;
+  background: transparent;
+  color: var(--text);
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 0.95rem;
+  text-align: left;
+  transition: color 0.2s ease;
+}
+
+.accordion-trigger:hover { color: var(--primary); }
+
+.chevron {
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
+
+.accordion-item.open .chevron {
+  transform: rotate(180deg);
+}
+
+.accordion-body {
+  max-height: 0;
+  overflow: hidden;
+  color: var(--text-muted);
+  line-height: 1.7;
+  transition: max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.accordion-body p {
+  margin: 0 0 var(--s4);
+  font-size: 0.9rem;
+}
+
+/* ── Insight Cards ── */
+.insight-card {
+  padding: var(--s6);
+  position: relative;
+  overflow: hidden;
+}
+
+.insight-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+}
+
+.insight-card:nth-child(1)::before { background: var(--gradient-cool); }
+.insight-card:nth-child(2)::before { background: var(--gradient-warm); }
+.insight-card:nth-child(3)::before { background: var(--gradient); }
+
+.insight-grid {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.insight-card h2 {
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: var(--s2);
+}
+
+.insight-card p {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+/* ── Code Button ── */
+.code-chip-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 30px;
+  padding: 0 var(--s3);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: white;
+  color: var(--text-muted);
+  font-weight: 500;
+  font-size: 0.72rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.code-chip-btn::before {
+  content: "</>";
+  color: var(--primary);
+  font-weight: 700;
+  font-size: 0.75rem;
+}
+
+.code-chip-btn:hover {
+  border-color: var(--primary-light);
+  color: var(--primary);
+  background: var(--primary-50);
+}
+
+.panel-header,
+.cluster-card-header,
+.insight-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s3);
+  margin-bottom: var(--s4);
+}
+
+/* ── Section Description ── */
+.section-desc {
+  margin: var(--s3) 0 var(--s8);
+  padding: var(--s4) var(--s5);
+  border-left: 3px solid var(--primary);
+  background: rgba(99, 102, 241, 0.06);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  color: var(--text-muted);
+  font-size: 0.82rem;
+  line-height: 1.7;
+  font-weight: 400;
+}
+
+/* ── Responsive ── */
+@media (max-width: 860px) {
+  .cluster-grid,
+  .insight-grid { grid-template-columns: 1fr; }
+  .metric-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* Dark pixel theme overrides */
+.cluster-card,
+.panel,
+.insight-card {
+  border: 3px solid var(--border);
+  background: rgba(35, 41, 70, 0.94);
+  box-shadow: var(--shadow);
+}
+
+.cluster-card {
+  border-left-width: 7px;
+}
+
+.risk-border-low { border-left-color: var(--success); }
+.risk-border-moderate { border-left-color: #ffd760; }
+.risk-border-high { border-left-color: var(--warning); }
+.risk-border-critical { border-left-color: var(--danger); }
+
+.metric {
+  border: 2px solid var(--border-light);
+  background: var(--surface-2);
+}
+
+.metric span {
+  color: var(--text-muted);
+}
+
+.metric strong {
+  color: var(--text);
+}
+
+.accordion-item {
+  border-top: 2px solid var(--border);
+}
+
+.accordion-trigger {
+  color: var(--text);
+}
+
+.accordion-body {
+  color: var(--text-secondary);
+}
+
+.insight-card {
+  background:
+    linear-gradient(135deg, rgba(57, 216, 200, 0.12), rgba(139, 92, 246, 0.18)),
+    var(--surface);
+}
+
+.insight-card h2 {
+  color: var(--accent-cyan);
+}
+
+.insight-card p {
+  color: var(--text-secondary);
+}
+
+.code-chip-btn {
+  border: 2px solid var(--primary-light);
+  color: var(--accent-cyan);
+  background: var(--surface-2);
+  box-shadow: 4px 4px 0 rgba(0,0,0,0.35);
+}

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="ClinicCluster — Upload clinic data and discover hidden patient risk groups using K-Means clustering analysis.">
+  <title>ClinicCluster — Patient Cluster Intelligence</title>
+  <link rel="icon" href="../images/favicon.ico">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Press+Start+2P&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/global.css">
+  <link rel="stylesheet" href="../css/index.css">
+</head>
+<body>
+  <header class="topbar">
+    <nav class="nav">
+      <a class="brand" href="index.html"><img class="brand-logo" src="../images/logo.png" alt="">ClinicCluster</a>
+      <div class="nav-links">
+        <a class="active" href="index.html">Home</a>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="patients.html">Patients</a>
+        <a href="results.html">Results</a>
+      </div>
+    </nav>
+  </header>
+  <main>
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow">K-Means Patient Intelligence</p>
+        <h1>Patient Cluster Intelligence</h1>
+        <p class="lede">Upload clinic data and discover hidden patient risk groups using the same K-Means workflow from your analysis notebook.</p>
+        <div class="actions">
+          <a class="btn primary" href="dashboard.html">Go to Dashboard</a>
+          <a class="btn ghost" href="patients.html">View Patients</a>
+        </div>
+      </div>
+
+      <div class="feature-grid" aria-label="Core capabilities">
+        <article class="feature-card">
+          <span class="feature-icon">K</span>
+          <h2>K-Means Clustering</h2>
+          <p>Scale seven clinical features, test K values, and choose the strongest segmentation by silhouette score.</p>
+        </article>
+        <article class="feature-card">
+          <span class="feature-icon">R</span>
+          <h2>Risk Classification</h2>
+          <p>Translate clusters into practical Low, Moderate, High, and Critical risk labels using visit intensity.</p>
+        </article>
+        <article class="feature-card">
+          <span class="feature-icon">V</span>
+          <h2>Visual Analytics</h2>
+          <p>Review PCA separation, feature means, patient distribution, and care recommendations in one place.</p>
+        </article>
+      </div>
+
+      <div class="how-it-works">
+        <h2>How It Works</h2>
+        <p>Upload any compatible patient CSV and the system auto-calculates everything.</p>
+        <div class="steps-grid">
+          <div class="step-card">
+            <span class="step-num">1</span>
+            <h3>Upload CSV</h3>
+            <p>Drop any patient data CSV with clinical features like age, weight, blood pressure, and more.</p>
+          </div>
+          <div class="step-card">
+            <span class="step-num">2</span>
+            <h3>Auto-Calculate</h3>
+            <p>BMI, normalized features, and data cleaning are computed automatically from your raw data.</p>
+          </div>
+          <div class="step-card">
+            <span class="step-num">3</span>
+            <h3>Cluster Patients</h3>
+            <p>K-Means finds the optimal K value and assigns each patient to a risk cluster.</p>
+          </div>
+          <div class="step-card">
+            <span class="step-num">4</span>
+            <h3>View Insights</h3>
+            <p>Explore interactive charts, risk labels, and care recommendations instantly.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

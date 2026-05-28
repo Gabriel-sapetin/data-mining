@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="ClinicCluster Results — View cluster summaries, risk interpretations, and care recommendations.">
+  <title>Results | ClinicCluster</title>
+  <link rel="icon" href="../images/favicon.ico">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Press+Start+2P&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/global.css">
+  <link rel="stylesheet" href="../css/results.css">
+  <link rel="stylesheet" href="../css/code-viewer.css">
+</head>
+<body>
+  <header class="topbar">
+    <nav class="nav">
+      <a class="brand" href="index.html"><img class="brand-logo" src="../images/logo.png" alt="">ClinicCluster</a>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="patients.html">Patients</a>
+        <a class="active" href="results.html">Results</a>
+      </div>
+    </nav>
+  </header>
+  <main class="page-shell">
+    <section class="page-head">
+      <div>
+        <p class="eyebrow">Care planning output</p>
+        <h1>Cluster Results</h1>
+      </div>
+    </section>
+    <section id="clusterCards" class="cluster-grid"></section>
+    <p class="section-desc">Each card above represents a patient cluster identified by K-Means clustering. The cards display key averaged metrics (Age, BMI, Blood Sugar, Cholesterol, Visits, Medications) for each group, along with a risk badge. Purpose: Provides an at-a-glance clinical profile of each cluster so healthcare providers can quickly understand the characteristics that define each patient group and prioritize care accordingly.</p>
+    <section class="panel" id="panel-interpretation">
+      <div class="panel-header">
+        <h2>Cluster Interpretation</h2>
+        <button class="code-chip-btn" data-code="cluster_summary">View Code</button>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Cluster</th><th>Profile Description</th><th>Risk Level</th></tr></thead>
+          <tbody id="interpretationRows"></tbody>
+        </table>
+      </div>
+      <p class="section-desc">This table maps each cluster to a human-readable profile description and its assigned risk level. Purpose: Translates raw clustering output into clinical language — helping staff understand which patients fall into low, moderate, high, or critical risk categories. Meaning: Risk labels are derived from the average feature values within each cluster, so higher-risk labels indicate clusters with elevated BMI, blood sugar, cholesterol, blood pressure, visit frequency, and medication counts.</p>
+    </section>
+    <section class="panel" id="panel-recommendations">
+      <div class="panel-header">
+        <h2>Recommendations</h2>
+        <button class="code-chip-btn" data-code="cluster_summary">View Code</button>
+      </div>
+      <div id="accordion" class="accordion"></div>
+      <p class="section-desc">The accordion above provides actionable care recommendations tailored to each risk level. Purpose: Bridges the gap between data analysis and clinical action — giving providers specific guidance on preventive measures, monitoring schedules, and intervention strategies for each risk group. Meaning: Recommendations escalate in urgency and specificity from low-risk (routine checkups) to critical-risk (immediate specialist referrals and intensive monitoring).</p>
+    </section>
+    <section id="insightCards" class="insight-grid"></section>
+    <p class="section-desc">These insight cards highlight key analytical findings from the clustering process. Purpose: Summarizes the most important patterns discovered by the algorithm in plain language. Meaning: These insights help stakeholders understand why the clusters formed the way they did and what clinical factors drive patient risk differentiation — valuable for presentations, reports, and care planning discussions.</p>
+  </main>
+  <div id="toast" class="toast hidden"></div>
+  <script src="../js/api.js"></script>
+  <script src="../js/code-viewer.js"></script>
+  <script src="../js/results.js"></script>
+</body>
+</html>

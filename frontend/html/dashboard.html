@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="ClinicCluster Dashboard — Run K-Means clustering analysis and visualize patient risk groups.">
+  <title>Dashboard | ClinicCluster</title>
+  <link rel="icon" href="../images/favicon.ico">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Press+Start+2P&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/global.css">
+  <link rel="stylesheet" href="../css/dashboard.css">
+  <link rel="stylesheet" href="../css/code-viewer.css">
+</head>
+<body>
+  <header class="topbar">
+    <nav class="nav">
+      <a class="brand" href="index.html"><img class="brand-logo" src="../images/logo.png" alt="">ClinicCluster</a>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a class="active" href="dashboard.html">Dashboard</a>
+        <a href="patients.html">Patients</a>
+        <a href="results.html">Results</a>
+      </div>
+    </nav>
+  </header>
+  <main class="page-shell">
+    <section class="page-head">
+      <div>
+        <p class="eyebrow">Notebook workflow, live API</p>
+        <h1>Clustering Dashboard</h1>
+      </div>
+      <div class="dashboard-actions">
+        <input id="dashUploadInput" type="file" accept=".csv" hidden>
+        <button class="btn ghost" id="uploadBtn">📁 Upload CSV</button>
+        <button class="btn primary" id="refreshBtn">▶ Run Analysis</button>
+      </div>
+    </section>
+
+    <!-- Stats row -->
+    <section class="stats-grid">
+      <article class="stat-card"><span>Total</span><strong id="totalPatients">--</strong><small>patients</small></article>
+      <article class="stat-card"><span>Clusters</span><strong id="numClusters">--</strong><small>selected K</small></article>
+      <article class="stat-card"><span>Avg BMI</span><strong id="avgBmi">--</strong><small>kg/m²</small></article>
+      <article class="stat-card"><span>Avg Visits</span><strong id="avgVisits">--</strong><small>per year</small></article>
+    </section>
+
+    <section id="emptyState" class="empty-state hidden">No patient data is loaded. Upload a CSV to get started.</section>
+
+    <!-- Visualization Picker -->
+    <section id="vizPicker" class="viz-picker hidden">
+      <div class="viz-categories" id="vizCategories"></div>
+      <div class="viz-items" id="vizItems"></div>
+    </section>
+
+    <!-- Single chart display -->
+    <section id="chartDisplay" class="chart-display hidden">
+      <div class="chart-display-header">
+        <h2 id="chartTitle">Select a visualization</h2>
+        <button class="view-code-btn" id="chartViewCode">View Code</button>
+      </div>
+      <div id="chartArea">
+        <div class="chart-canvas-wrap">
+          <canvas id="mainChart"></canvas>
+        </div>
+      </div>
+      <p id="chartDescription" class="chart-description hidden"></p>
+    </section>
+  </main>
+  <div id="toast" class="toast hidden"></div>
+  <script src="../js/api.js"></script>
+  <script src="../js/charts.js"></script>
+  <script src="../js/code-viewer.js"></script>
+  <script src="../js/dashboard.js"></script>
+</body>
+</html>
