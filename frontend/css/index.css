@@ -3,32 +3,43 @@
   position: relative;
   min-height: calc(100vh - 72px);
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  padding: var(--s16) var(--s6);
+  padding: clamp(40px, 7vh, 76px) var(--s6) clamp(34px, 6vh, 64px);
   background:
-    linear-gradient(180deg, rgba(7, 12, 24, 0.45) 0%, rgba(12, 18, 34, 0.54) 46%, rgba(12, 18, 34, 0.9) 100%),
+    linear-gradient(180deg, rgba(7, 12, 24, 0.38) 0%, rgba(12, 18, 34, 0.5) 52%, rgba(12, 18, 34, 0.74) 100%),
     radial-gradient(circle at 50% 18%, rgba(255, 238, 158, 0.12), transparent 23%),
     radial-gradient(circle at 50% 50%, rgba(68, 201, 214, 0.14), transparent 42%),
-    url("../images/landing-moon-bg.jpg"),
     var(--bg-deep);
-  background-position: center, center, center, center top, center;
+  background-position: center, center, center, center;
   background-repeat: no-repeat;
-  background-size: cover, cover, cover, cover, auto;
+  background-size: cover, cover, cover, auto;
   isolation: isolate;
+}
+
+.hero-video {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 48%;
+  opacity: 0.86;
+  image-rendering: pixelated;
 }
 
 .hero::before {
   position: absolute;
   inset: 0;
-  z-index: 0;
+  z-index: 1;
   pointer-events: none;
   background:
+    linear-gradient(180deg, rgba(5, 9, 19, 0.22) 0%, rgba(8, 13, 25, 0.24) 48%, rgba(10, 15, 28, 0.58) 100%),
     linear-gradient(rgba(255,255,255,0.028) 1px, transparent 1px),
     linear-gradient(90deg, rgba(255,255,255,0.028) 1px, transparent 1px);
-  background-size: 24px 24px;
+  background-size: cover, 24px 24px, 24px 24px;
   mix-blend-mode: soft-light;
   content: "";
 }
@@ -50,7 +61,7 @@
 }
 
 .hero::after {
-  z-index: 0;
+  z-index: 1;
   right: 20%;
   bottom: 24%;
   animation-delay: -2s;
@@ -58,28 +69,36 @@
 
 .hero-copy {
   position: relative;
-  z-index: 1;
+  z-index: 2;
   max-width: 860px;
-  margin: 0 auto var(--s16);
+  margin: 0 auto;
   text-align: center;
   animation: fadeIn 0.8s ease;
 }
 
 .hero h1 {
   margin-bottom: var(--s4);
-  background: linear-gradient(180deg, #d6c9ff 0%, #9b7cf4 48%, #d45cb8 100%);
+  background:
+    linear-gradient(180deg, #f3edff 0%, #a77cff 44%, #f060d3 100%);
   background-clip: text;
-  font-size: clamp(2.7rem, 7vw, 5.25rem);
-  font-weight: 900;
-  line-height: 1.02;
+  font-family: "Press Start 2P", monospace;
+  font-size: clamp(1.75rem, 4.7vw, 4.1rem);
+  font-weight: 400;
+  line-height: 1.35;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  text-shadow: 4px 4px 0 rgba(10, 12, 30, 0.48);
+  filter: drop-shadow(0 0 10px rgba(139, 92, 246, 0.38));
+  text-shadow:
+    3px 3px 0 rgba(31, 22, 82, 0.9),
+    6px 6px 0 rgba(7, 11, 25, 0.78),
+    0 0 18px rgba(57, 216, 200, 0.22),
+    0 0 30px rgba(217, 70, 184, 0.22);
+  animation: titleGlow 2.8s ease-in-out infinite;
 }
 
 .lede {
   max-width: 620px;
-  margin: var(--s4) auto var(--s8);
+  margin: var(--s4) auto var(--s5);
   color: #eef4ff;
   font-size: 1.13rem;
   font-weight: 600;
@@ -90,8 +109,63 @@
 .actions {
   display: flex;
   justify-content: center;
+  align-items: center;
   gap: var(--s3);
   flex-wrap: wrap;
+}
+
+.pixel-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: clamp(96px, 9vw, 132px);
+  line-height: 0;
+  image-rendering: pixelated;
+  transition: transform 120ms ease, filter 120ms ease;
+}
+
+.pixel-button:hover {
+  transform: translate(-3px, -3px);
+  filter: brightness(1.06);
+}
+
+.pixel-button:active {
+  transform: translate(2px, 2px);
+  filter: brightness(0.95);
+}
+
+.pixel-button img {
+  width: 100%;
+  height: auto;
+  image-rendering: pixelated;
+}
+
+.landing-details {
+  position: relative;
+  overflow: hidden;
+  padding: var(--s14, 56px) var(--s6) var(--s16);
+  background:
+    linear-gradient(180deg, rgba(7, 12, 24, 0.78), rgba(11, 18, 32, 0.8) 44%, rgba(9, 14, 26, 0.92)),
+    url("../images/landing-details-bg.jpg"),
+    var(--bg-deep);
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  isolation: isolate;
+}
+
+.landing-details::before {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    linear-gradient(rgba(255,255,255,0.026) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.026) 1px, transparent 1px);
+  background-size: 22px 22px;
+  content: "";
+  opacity: 0.7;
 }
 
 .feature-grid {
@@ -110,7 +184,7 @@
   min-height: 196px;
   padding: var(--s6);
   border: 3px solid var(--accent-cyan);
-  background: rgba(24, 30, 52, 0.9);
+  background: rgba(24, 30, 52, 0.82);
   backdrop-filter: blur(4px);
   box-shadow: var(--shadow);
   transition: transform 140ms ease, box-shadow 140ms ease;
@@ -199,7 +273,7 @@
 .step-card {
   padding: var(--s6) var(--s4);
   border: 3px solid var(--border);
-  background: rgba(25, 31, 54, 0.9);
+  background: rgba(25, 31, 54, 0.84);
   backdrop-filter: blur(4px);
   box-shadow: var(--shadow-xs);
 }
@@ -227,12 +301,55 @@
   color: var(--text-muted);
 }
 
+@keyframes titleGlow {
+  0%, 100% {
+    filter: drop-shadow(0 0 8px rgba(139, 92, 246, 0.34));
+  }
+
+  50% {
+    filter:
+      drop-shadow(0 0 14px rgba(57, 216, 200, 0.38))
+      drop-shadow(0 0 18px rgba(217, 70, 184, 0.3));
+  }
+}
+
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(34px) scale(0.97);
+  transition:
+    opacity 560ms ease,
+    transform 560ms cubic-bezier(0.2, 0.9, 0.2, 1);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+.reveal-on-scroll.is-visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
 @media (max-width: 860px) {
   .feature-grid { grid-template-columns: 1fr; max-width: 440px; }
   .steps-grid { grid-template-columns: repeat(2, 1fr); }
+  .hero {
+    min-height: calc(100svh - 72px);
+  }
+  .hero-video { object-position: center center; }
+  .landing-details { background-attachment: scroll; }
 }
 
 @media (max-width: 520px) {
   .steps-grid { grid-template-columns: 1fr; }
-  .hero { padding: var(--s10) var(--s4); }
+  .hero { padding: var(--s8) var(--s4); }
+  .actions { gap: var(--s2); }
+  .pixel-button { width: min(42vw, 124px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal-on-scroll,
+  .hero h1 {
+    animation: none;
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
 }
