@@ -1,0 +1,260 @@
+INSTALL AND RUN GUIDE
+ClinicCluster Patient Clustering System
+
+This guide explains how to install the requirements and run the ClinicCluster
+system after downloading the project as a ZIP file.
+
+
+1. EXTRACT THE ZIP FILE
+
+After downloading the ZIP file, extract it first.
+
+Example:
+Right-click the ZIP file, then choose "Extract All".
+
+Open the extracted project folder.
+
+
+2. INSTALL PYTHON
+
+Make sure Python is installed on the computer.
+
+Recommended version:
+Python 3.10 or higher
+
+To check if Python is installed, open Command Prompt or PowerShell and type:
+
+python --version
+
+If Python is installed, it will show a version number.
+
+Example:
+Python 3.12.0
+
+If Python is not installed, download it from:
+https://www.python.org/downloads/
+
+Important:
+During installation, check the option:
+Add Python to PATH
+
+
+3. OPEN THE PROJECT FOLDER IN TERMINAL
+
+Open Command Prompt or PowerShell inside the extracted project folder.
+
+The folder should contain files such as:
+- main.py
+- requirements.txt
+- clinic_patients.csv
+- app folder
+- frontend folder
+
+Example command:
+
+cd "C:\Users\YourName\Downloads\data mining clinic"
+
+Change the path depending on where the project was extracted.
+
+
+4. CREATE A VIRTUAL ENVIRONMENT
+
+Creating a virtual environment is recommended so the project dependencies are
+installed only for this system.
+
+Run this command:
+
+python -m venv .venv
+
+
+5. ACTIVATE THE VIRTUAL ENVIRONMENT
+
+For Windows PowerShell:
+
+.\.venv\Scripts\Activate.ps1
+
+For Windows Command Prompt:
+
+.\.venv\Scripts\activate.bat
+
+For macOS or Linux:
+
+source .venv/bin/activate
+
+After activation, the terminal may show:
+
+(.venv)
+
+
+6. INSTALL THE REQUIREMENTS
+
+Install all required packages using this command:
+
+pip install -r requirements.txt
+
+The system will install:
+- fastapi
+- uvicorn
+- pandas
+- numpy
+- scikit-learn
+- python-multipart
+- pydantic
+
+
+7. RUN THE SYSTEM
+
+After the requirements are installed, run the system using:
+
+uvicorn main:app --reload --port 8001
+
+Wait until the terminal shows that the server is running.
+
+Example:
+Uvicorn running on http://127.0.0.1:8001
+
+
+8. OPEN THE SYSTEM IN THE BROWSER
+
+Open a browser and go to:
+
+http://127.0.0.1:8001
+
+You can also open these pages:
+
+Home:
+http://127.0.0.1:8001
+
+Dashboard:
+http://127.0.0.1:8001/dashboard.html
+
+Patients:
+http://127.0.0.1:8001/patients.html
+
+Results:
+http://127.0.0.1:8001/results.html
+
+
+9. HOW TO USE THE SYSTEM
+
+Basic usage:
+
+1. Open the system in the browser.
+2. Go to the Patients page.
+3. Upload a clinic patient CSV file.
+4. The backend will clean and process the data.
+5. Run or view clustering results.
+6. Check the Dashboard and Results pages for charts and interpretations.
+
+The project already includes a sample dataset:
+
+clinic_patients.csv
+
+This dataset is loaded automatically when the system starts, if the file exists.
+
+
+10. REQUIRED CSV FORMAT
+
+The CSV file should contain patient clinical records.
+
+Recommended columns:
+- Patient ID
+- Age
+- Weight
+- Height
+- Blood Pressure
+- Blood Sugar
+- Cholesterol
+- Visits per Year
+- Medication Count
+
+The system uses these values to calculate or process:
+- BMI
+- Clusters
+- Risk Labels
+- Statistics
+- Visualizations
+
+
+11. COMMON PROBLEMS AND FIXES
+
+Problem:
+python is not recognized
+
+Fix:
+Install Python and make sure "Add Python to PATH" is checked.
+
+
+Problem:
+pip is not recognized
+
+Fix:
+Try this command instead:
+
+python -m pip install -r requirements.txt
+
+
+Problem:
+PowerShell cannot activate the virtual environment
+
+Fix:
+Run PowerShell as administrator, then type:
+
+Set-ExecutionPolicy RemoteSigned
+
+Then activate again:
+
+.\.venv\Scripts\Activate.ps1
+
+
+Problem:
+Port 8001 is already in use
+
+Fix:
+Use another port, such as 8002:
+
+uvicorn main:app --reload --port 8002
+
+Then open:
+
+http://127.0.0.1:8002
+
+
+Problem:
+ModuleNotFoundError appears
+
+Fix:
+Make sure the virtual environment is activated, then reinstall requirements:
+
+pip install -r requirements.txt
+
+
+12. HOW TO STOP THE SYSTEM
+
+To stop the running server, go back to the terminal and press:
+
+CTRL + C
+
+
+13. QUICK COMMAND SUMMARY
+
+Use these commands after extracting the ZIP file:
+
+cd "path-to-project-folder"
+python -m venv .venv
+.\.venv\Scripts\Activate.ps1
+pip install -r requirements.txt
+uvicorn main:app --reload --port 8001
+
+Then open:
+
+http://127.0.0.1:8001
+
+
+14. SIMPLE EXPLANATION
+
+To run ClinicCluster, the user needs Python installed. After extracting the ZIP
+file, they open the project folder in the terminal, create and activate a virtual
+environment, install the packages from requirements.txt, and run the FastAPI
+server using Uvicorn. Once the server is running, the system can be opened in the
+browser using http://127.0.0.1:8001.

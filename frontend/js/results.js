@@ -9,6 +9,8 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
+const resultChartInstances = {};
+
 // Loads cluster results and recommendations for the results page.
 async function loadResults() {
   try {
@@ -38,7 +40,10 @@ function renderClusterCards(summaries) {
           <h2>Cluster ${item.cluster_id}</h2>
           ${getRiskBadge(item.risk_label)}
         </div>
-        <button class="code-chip-btn" data-code="kmeans">View Code</button>
+        <div class="cluster-actions">
+          <button class="chart-chip-btn" data-cluster-chart="${item.cluster_id}">View Chart</button>
+          <button class="code-chip-btn" data-code="kmeans">View Code</button>
+        </div>
       </div>
       <div class="metric-grid">
         ${metric("Patients", item.patient_count)}
@@ -48,6 +53,9 @@ function renderClusterCards(summaries) {
         ${metric("Blood Sugar", item.avg_blood_sugar)}
         ${metric("Cholesterol", item.avg_cholesterol)}
       </div>
+      <div class="cluster-chart-panel hidden" id="clusterChartPanel-${item.cluster_id}">
+        <canvas id="clusterChart-${item.cluster_id}" aria-label="Cluster ${item.cluster_id} profile chart"></canvas>
+      </div>
     </article>
   `).join("");
   // Wire click handlers on freshly rendered buttons
@@ -56,6 +64,67 @@ function renderClusterCards(summaries) {
       e.stopPropagation();
       openCodeModal(btn.dataset.code);
     });
+  });
+  summaries.forEach((item) => {
+    const btn = document.querySelector(`[data-cluster-chart="${item.cluster_id}"]`);
+    const panel = document.getElementById(`clusterChartPanel-${item.cluster_id}`);
+    if (!btn || !panel) return;
+    btn.addEventListener("click", () => {
+      const isHidden = panel.classList.toggle("hidden");
+      btn.textContent = isHidden ? "View Chart" : "Hide Chart";
+      if (!isHidden) renderClusterProfileChart(item);
+    });
+  });
+}
+
+// Renders one cluster's averaged clinical profile as a compact bar chart.
+function renderClusterProfileChart(item) {
+  const canvasId = `clusterChart-${item.cluster_id}`;
+  const canvas = document.getElementById(canvasId);
+  if (!canvas || !window.Chart) return;
+  if (resultChartInstances[canvasId]) resultChartInstances[canvasId].destroy();
+
+  resultChartInstances[canvasId] = new Chart(canvas, {
+    type: "bar",
+    data: {
+      labels: ["Age", "BMI", "Visits", "Blood Sugar", "Cholesterol"],
+      datasets: [{
+        label: `Cluster ${item.cluster_id}`,
+        data: [
+          item.avg_age,
+          item.avg_bmi,
+          item.avg_visits,
+          item.avg_blood_sugar,
+          item.avg_cholesterol
+        ].map(Number),
+        backgroundColor: getRiskColor(item.risk_label),
+        borderColor: "rgba(255,255,255,0.9)",
+        borderWidth: 1
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          callbacks: {
+            label: (context) => `${context.label}: ${context.parsed.y}`
+          }
+        }
+      },
+      scales: {
+        x: {
+          grid: { display: false },
+          ticks: { color: "#d9deea", font: { size: 10 } }
+        },
+        y: {
+          beginAtZero: true,
+          grid: { color: "rgba(169, 176, 194, 0.16)" },
+          ticks: { color: "#a9b0c2", font: { size: 10 } }
+        }
+      }
+    }
   });
 }
 

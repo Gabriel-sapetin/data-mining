@@ -52,6 +52,13 @@
   font-weight: 700;
 }
 
+.cluster-actions {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s2);
+  flex-shrink: 0;
+}
+
 /* ── Metrics Grid ── */
 .metric-grid {
   display: grid;
@@ -182,7 +189,8 @@
 }
 
 /* ── Code Button ── */
-.code-chip-btn {
+.code-chip-btn,
+.chart-chip-btn {
   display: inline-flex;
   align-items: center;
   gap: 6px;
@@ -207,10 +215,38 @@
   font-size: 0.75rem;
 }
 
-.code-chip-btn:hover {
+.chart-chip-btn::before {
+  content: "";
+  width: 13px;
+  height: 13px;
+  background:
+    linear-gradient(to top, var(--accent-cyan) 0 45%, transparent 45%),
+    linear-gradient(to top, var(--primary-light) 0 70%, transparent 70%),
+    linear-gradient(to top, #ffd760 0 92%, transparent 92%);
+  background-size: 3px 100%, 3px 100%, 3px 100%;
+  background-position: 0 0, 5px 0, 10px 0;
+  background-repeat: no-repeat;
+}
+
+.code-chip-btn:hover,
+.chart-chip-btn:hover {
   border-color: var(--primary-light);
   color: var(--primary);
   background: var(--primary-50);
+}
+
+.cluster-chart-panel {
+  height: 210px;
+  margin-top: var(--s4);
+  padding: var(--s3);
+  border: 2px solid var(--border-light);
+  border-radius: var(--radius);
+  background: rgba(18, 25, 43, 0.48);
+}
+
+.cluster-chart-panel canvas {
+  width: 100% !important;
+  height: 100% !important;
 }
 
 .panel-header,
@@ -300,7 +336,8 @@
   color: var(--text-secondary);
 }
 
-.code-chip-btn {
+.code-chip-btn,
+.chart-chip-btn {
   border: 2px solid var(--primary-light);
   color: var(--accent-cyan);
   background: var(--surface-2);

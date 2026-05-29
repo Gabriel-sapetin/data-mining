@@ -99,10 +99,13 @@ function renderScatterChart(canvasId, pcaPoints) {
     label: "Centroids",
     data: pcaPoints.filter((p) => p.is_centroid),
     parsing: { xAxisKey: "x", yAxisKey: "y" },
-    backgroundColor: "#111827",
+    backgroundColor: "#ff7a38",
+    borderColor: "#ff7a38",
     pointStyle: "crossRot",
-    pointRadius: 12,
-    borderWidth: 3
+    pointRadius: 13,
+    pointHoverRadius: 16,
+    pointBorderWidth: 4,
+    borderWidth: 4
   });
   replaceChart(canvasId, {
     type: "scatter",
