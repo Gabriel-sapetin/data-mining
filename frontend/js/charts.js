@@ -16,9 +16,10 @@ function replaceChart(canvasId, config) {
 
 function applyChartTheme(canvas, config) {
   const isDarkCard = Boolean(canvas?.closest(".hist-cell"));
-  const textColor = isDarkCard ? "#d9deea" : "#25304a";
-  const mutedColor = isDarkCard ? "#a9b0c2" : "#5f6d86";
-  const gridColor = isDarkCard ? "rgba(169, 176, 194, 0.22)" : "rgba(37, 48, 74, 0.12)";
+  const isFullView = Boolean(canvas?.closest(".chart-display.full-view"));
+  const textColor = isFullView ? "#111827" : (isDarkCard ? "#d9deea" : "#25304a");
+  const mutedColor = isFullView ? "#25304a" : (isDarkCard ? "#a9b0c2" : "#5f6d86");
+  const gridColor = isFullView ? "rgba(17, 24, 39, 0.16)" : (isDarkCard ? "rgba(169, 176, 194, 0.22)" : "rgba(37, 48, 74, 0.12)");
 
   config.options = config.options || {};
   config.options.plugins = config.options.plugins || {};
@@ -39,6 +40,21 @@ function applyChartTheme(canvas, config) {
       };
       config.options.scales[axis] = scale;
     });
+  }
+
+  if (isFullView) {
+    config.options.plugins.legend.labels = {
+      ...(config.options.plugins.legend.labels || {}),
+      color: textColor
+    };
+    if (config.options.scales) {
+      Object.keys(config.options.scales).forEach((axis) => {
+        const scale = config.options.scales[axis];
+        scale.grid = { ...(scale.grid || {}), color: gridColor };
+        scale.ticks = { ...(scale.ticks || {}), color: mutedColor };
+        scale.title = { ...(scale.title || {}), color: textColor };
+      });
+    }
   }
 
   return config;

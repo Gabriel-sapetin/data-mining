@@ -71,13 +71,20 @@ const VIZ_CATALOG = [
 let _clusterData = null;  // Cached cluster API result
 let _activeCat = 0;
 let _activeItem = null;
+let _isFullView = false;
 
 // ── Init ──────────────────────────────────────────────────────────────────────
 
 document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("refreshBtn").addEventListener("click", forceRunAnalysis);
+  document.getElementById("chartFullView").addEventListener("click", toggleFullView);
   document.getElementById("chartViewCode").addEventListener("click", () => {
     if (_activeItem) openCodeModal(_activeItem.codeKey);
+  });
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && document.body.classList.contains("dashboard-full-view-open")) {
+      toggleFullView(false);
+    }
   });
 
   // Dashboard CSV upload handling
@@ -148,6 +155,22 @@ function selectItem(catIdx, itemIdx) {
   renderActiveChart();
   // Render description below the chart
   renderDescription(_activeItem.description);
+}
+
+function toggleFullView(forceState) {
+  const chartDisplay = document.getElementById("chartDisplay");
+  const fullViewBtn = document.getElementById("chartFullView");
+  if (!chartDisplay || !_activeItem) return;
+
+  _isFullView = typeof forceState === "boolean" ? forceState : !_isFullView;
+  chartDisplay.classList.toggle("full-view", _isFullView);
+  document.body.classList.toggle("dashboard-full-view-open", _isFullView);
+  fullViewBtn.textContent = _isFullView ? "Exit Full View" : "Full View";
+
+  window.setTimeout(() => {
+    renderActiveChart();
+    renderDescription(_activeItem.description);
+  }, 80);
 }
 
 // ── Data Loading ──────────────────────────────────────────────────────────────
